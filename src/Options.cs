@@ -76,8 +76,16 @@ namespace Sharphound
         [Option(HelpText = "Password for LDAP", Default = null)]
         public string LDAPPassword { get; set; }
 
-        [Option(HelpText = "Override domain controller to pull LDAP from. This option can result in data loss",
-            Default = null)]
+        [Option(HelpText = "Do the session enumeration with local admin credentials instead of domain credentials", Default = false)]
+        public bool DoLocalAdminSessionEnum { get; set; }
+
+        [Option(HelpText = "Username for local Administrator to be used if DoLocalAdminSessionEnum is set", Default = null)]
+        public string LocalAdminUsername { get; set; }
+
+        [Option(HelpText = "Password for local Administrator to be used if DoLocalAdminSessionEnum is set", Default = null)]
+        public string LocalAdminPassword { get; set; }
+
+        [Option(HelpText = "Override domain controller to pull LDAP from. This option can result in data loss", Default = null)]
         public string DomainController { get; set; }
 
         [Option(HelpText = "Override port for LDAP", Default = 0)]
@@ -131,10 +139,10 @@ namespace Sharphound
         [Option('l', "Loop", HelpText = "Loop computer collection")]
         public bool Loop { get; set; }
 
-        [Option(HelpText="Loop duration (Defaults to 2 hours)")]
+        [Option(HelpText="Loop duration (hh:mm:ss - 05:00:00 is 5 hours, default: 2 hrs)")]
         public TimeSpan LoopDuration { get; set; }
 
-        [Option(HelpText="Delay between loops")] public TimeSpan LoopInterval { get; set; }
+        [Option(HelpText="Add delay between loops (hh:mm:ss - 00:03:00 is 3 minutes)")] public TimeSpan LoopInterval { get; set; }
 
         //Misc Options
         [Option(HelpText = "Interval in which to display status in milliseconds", Default = 30000)]
